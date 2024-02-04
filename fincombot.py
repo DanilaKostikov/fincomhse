@@ -62,7 +62,6 @@ if __name__ == '__main__':
                 if not res[i][column_name] and res[i][column_name] != 0:
                     flag = False
             if flag:
-                print(res)
                 owner = res[i]['ФИО']
                 sbor_name = res[i]['Название / цель']
                 res_new.append(sbor_name)
@@ -103,7 +102,7 @@ if __name__ == '__main__':
                         new_post = f'<b>{sbor_name.upper()}</b>\n{committee}, {owner}\n\n<u>Собрана полная сумма</u>: <i>{goal}</i> рублей\nС отчетом о тратах можно ознакомиться по ссылке:\n{check_url}\n\nОгромное всем спасибо!⭐️🎉🎊'
                         requests.get(
                             f'https://api.telegram.org/bot{BOT_CREDENTIALS}/sendMessage?chat_id={chat_id}&parse_mode=HTML&text={new_post}')
-                        worksheet.update(values='1', range_name=f'P{i + 2}')
+                        worksheet.update(values=[['1']], range_name=f'P{i + 2}')
                 if sbor_name not in res_previous and ended == 0:
                     new_post = f'<b>{sbor_name.upper()}</b>\n{committee}, {owner}\n\n<i>{annotation}</i>\n\n<u>Цель собрать</u>: <i>{goal}</i> рублей\n<a href="{url}">Поддержать проект</a>\n\nДедлайн сбора {end_date}'
                     requests.get(
