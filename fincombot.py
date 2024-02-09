@@ -73,6 +73,7 @@ if __name__ == '__main__':
                 end_date = res[i]['Срок конец']
                 collected_old = res[i]['Собрано на данный момент']
                 ended = res[i]['Сбор окончен']
+                start = res[i]['Пост о начале']
                 try:
                     name, needs, collected = collect_info(url)
                 except:
@@ -103,10 +104,11 @@ if __name__ == '__main__':
                         requests.get(
                             f'https://api.telegram.org/bot{BOT_CREDENTIALS}/sendMessage?chat_id={chat_id}&parse_mode=HTML&text={new_post}')
                         worksheet.update(values=[['1']], range_name=f'P{i + 2}')
-                if sbor_name not in res_previous and ended == 0:
+                if sbor_name not in res_previous and ended == 0 and start == 0:
                     new_post = f'<b>{sbor_name.upper()}</b>\n{committee}, {owner}\n\n<i>{annotation}</i>\n\n<u>Цель собрать</u>: <i>{goal}</i> рублей\n<a href="{url}">Поддержать проект</a>\n\nДедлайн сбора {end_date}'
                     requests.get(
                         f'https://api.telegram.org/bot{BOT_CREDENTIALS}/sendMessage?chat_id={chat_id}&parse_mode=HTML&text={new_post}')
+                    worksheet.update(values=[['1']], range_name=f'Q{i + 2}')
         res_previous = res_new
         diff = time.time() - current_time
         if diff >= 86400:
