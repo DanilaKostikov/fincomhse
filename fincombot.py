@@ -70,6 +70,8 @@ if __name__ == '__main__':
                 committee = res[i]['Комитет']
                 annotation = res[i]['Аннотация']
                 goal = res[i]['Сумма сбора']
+                if isinstance(goal, str):
+                    goal = int(''.join(goal.split()))
                 end_date = res[i]['Срок конец']
                 collected_old = res[i]['Собрано на данный момент']
                 ended = res[i]['Сбор окончен']
