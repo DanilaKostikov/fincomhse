@@ -100,12 +100,12 @@ if __name__ == '__main__':
                             if changed[j]['Название / цель'] == sbor_name:
                                 changed.pop(j)
                         check_url = res[i]['Ссылка на папку с чеками']
-                        new_post = f'<b>{sbor_name.upper()}</b>\n{committee}, {owner}\n\n<u>Собрана полная сумма</u>: <i>{goal}</i> рублей\nС отчетом о тратах можно ознакомиться по ссылке:\n{check_url}\n\nОгромное всем спасибо!⭐️🎉🎊'
+                        new_post = f'<b>{sbor_name.upper()}</b>\n{owner}\n\n<u>Собрана полная сумма</u>: <i>{goal}</i> рублей\nС отчетом о тратах можно ознакомиться по ссылке:\n{check_url}\n\nОгромное всем спасибо!⭐️🎉🎊'
                         requests.get(
                             f'https://api.telegram.org/bot{BOT_CREDENTIALS}/sendMessage?chat_id={chat_id}&parse_mode=HTML&text={new_post}')
                         worksheet.update(values=[['1']], range_name=f'P{i + 2}')
                 if sbor_name not in res_previous and ended == 0 and start == 0:
-                    new_post = f'<b>{sbor_name.upper()}</b>\n{committee}, {owner}\n\n<i>{annotation}</i>\n\n<u>Цель собрать</u>: <i>{goal}</i> рублей\n<a href="{url}">Поддержать проект</a>\n\nДедлайн сбора {end_date}'
+                    new_post = f'<b>{sbor_name.upper()}</b>\n{owner}\n\n<i>{annotation}</i>\n\n<u>Цель собрать</u>: <i>{goal}</i> рублей\n<a href="{url}">Поддержать проект</a>\n\nДедлайн сбора {end_date}'
                     requests.get(
                         f'https://api.telegram.org/bot{BOT_CREDENTIALS}/sendMessage?chat_id={chat_id}&parse_mode=HTML&text={new_post}')
                     worksheet.update(values=[['1']], range_name=f'Q{i + 2}')
@@ -123,7 +123,7 @@ if __name__ == '__main__':
                 goal = sbor['Сумма сбора']
                 left = sbor['Осталось собрать']
                 end_date = sbor['Срок конец']
-                new_post = f'<b>{sbor_name.upper()}</b>\n{committee}, {owner}\n\n<u>Собрано</u>: <i>{collected}</i> из <i>{goal}</i> рублей\n<u>Осталось собрать</u>: <i>{left}</i> рублей\n<a href="{url}">Поддержать проект</a>\n\nДедлайн сбора {end_date}'
+                new_post = f'<b>{sbor_name.upper()}</b>\n{owner}\n\n<u>Собрано</u>: <i>{collected}</i> из <i>{goal}</i> рублей\n<u>Осталось собрать</u>: <i>{left}</i> рублей\n<a href="{url}">Поддержать проект</a>\n\nДедлайн сбора {end_date}'
                 response = requests.get(
                     f'https://api.telegram.org/bot{BOT_CREDENTIALS}/sendMessage?chat_id={chat_id}&parse_mode=HTML&text={new_post}')
             changed = []
